@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль — Аптека Онлайн</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --danger: #dc3545;
+            --bg: #f4f6f9;
+            --text: #333;
+            --white: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            header a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+        nav a {
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 50px auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .error, .success {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: var(--danger);
+        }
+
+        .success {
+            color: green;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+            .tabs button {
+                flex: 1;
+                padding: 12px;
+                background: #eee;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+                .tabs button.active {
+                    background: var(--primary);
+                    color: white;
+                }
+
+        .hidden {
+            display: none;
+        }
+
+        .logout-btn {
+            background: var(--danger);
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">Аптека Онлайн</a>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="cart.html">Корзина</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('register')">Регистрация</button>
+            <button class="tab-btn" onclick="switchTab('login')">Вход</button>
+        </div>
+
+        <div id="register-form">
+            <h2>Регистрация</h2>
+            <div class="error" id="register-error"></div>
+            <input type="text" id="reg-name" placeholder="Имя" required />
+            <input type="email" id="reg-email" placeholder="Email" required />
+            <input type="password" id="reg-password" placeholder="Пароль" required />
+            <button onclick="register()">Зарегистрироваться</button>
+        </div>
+
+        <div id="login-form" class="hidden">
+            <h2>Вход</h2>
+            <div class="error" id="login-error"></div>
+            <input type="email" id="login-email" placeholder="Email" required />
+            <input type="password" id="login-password" placeholder="Пароль" required />
+            <button onclick="login()">Войти</button>
+        </div>
+
+        <div id="profile" class="hidden">
+            <h2>Добро пожаловать, <span id="user-name"></span>!</h2>
+            <p><strong>Email:</strong> <span id="user-email"></span></p>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+            document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.tab-btn[onclick*="${tab}"]`).classList.add('active');
+        }
+
+        function register() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value.trim();
+
+            fetch('auth.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'register', name, email, password })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        location.href = 'index.html';
+                    } else {
+                        document.getElementById('register-error').textContent = data.message;
+                    }
+                });
+        }
+
+        function login() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+
+            fetch('auth.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'login', email, password })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        showProfile();
+                    } else {
+                        document.getElementById('login-error').textContent = data.message;
+                    }
+                });
+        }
+
+        function showProfile() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) return;
+
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-form').classList.add('hidden');
+            document.querySelector('.tabs').classList.add('hidden');
+            document.getElementById('user-name').textContent = user.name;
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('profile').classList.remove('hidden');
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            location.reload();
+        }
+
+        // При загрузке показать профиль, если авторизован
+        window.onload = () => {
+            if (localStorage.getItem('user')) showProfile();
+        };
+    </script>
+
+</body>
+</html>

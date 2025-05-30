@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Аптека Онлайн — Главная</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="logo">Аптека Онлайн</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-link">Главная</a></li>
+                <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+                <li><a href="profile.html" class="nav-link">Профиль</a></li>
+                <li><a href="cart.html" class="nav-link">Корзина</a></li>
+            </ul>
+        </nav>
+        <label class="theme-switch" for="toggleTheme">
+            <input type="checkbox" id="toggleTheme" />
+            <span class="slider"></span>
+        </label>
+    </header>
+
+    <section class="banner">
+        <h1>Здоровье — наш приоритет</h1>
+        <p>Качественные лекарства с быстрой доставкой по всей стране</p>
+        <a href="#" class="cta-button">Купить сейчас</a>
+    </section>
+
+    <section class="categories">
+        <h2>Категории товаров</h2>
+        <div class="category-list">
+            <button class="category-btn">Витамины</button>        
+            <button class="category-btn">Анальгетики</button>
+            <button class="category-btn">Антибиотики</button>
+            <button class="category-btn">Средства от простуды</button>
+        </div>
+    </section>
+
+    <section class="slider" aria-label="Акции и предложения">
+        <div class="slider-container">
+            <div class="slide">Скидка 20% на витамины!</div>
+            <div class="slide">Бесплатная доставка при заказе от 2000 ₽</div>
+            <div class="slide">Новинка: Иммуномодуляторы</div>
+        </div>
+    </section>
+
+    <section class="popular-products">
+        <h2>Популярные товары</h2>
+        <div class="product-list">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/220x150?text=Товар+1" alt="Витамин C" />
+                <h3>Витамин C</h3>
+                <p>Укрепляет иммунитет и защищает от простуды</p>
+                <span class="price">350 ₽</span>
+                <button class="add-to-cart">В корзину</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/220x150?text=Товар+2" alt="Парацетамол" />
+                <h3>Парацетамол</h3>
+                <p>Обезболивающее и жаропонижающее средство</p>
+                <span class="price">120 ₽</span>
+                <button class="add-to-cart">В корзину</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/220x150?text=Товар+3" alt="Антибиотик А" />
+                <h3>Антибиотик А</h3>
+                <p>Эффективное лечение бактериальных инфекций</p>
+                <span class="price">890 ₽</span>
+                <button class="add-to-cart">В корзину</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews" aria-label="Отзывы клиентов">
+        <h2>Отзывы клиентов</h2>
+        <div class="review">«Отличный сервис и быстрая доставка! Заказываю здесь регулярно.» — Марина</div>
+        <div class="review">«Большой выбор лекарств и приятные цены.» — Иван</div>
+        <div class="review">«Поддержка всегда помогает и консультирует.» — Ольга</div>
+    </section>
+
+    <section class="subscribe" aria-label="Подписка на новости">
+        <h2>Подпишитесь на новости и акции</h2>
+        <p>Будьте в курсе выгодных предложений и новинок.</p>
+        <form id="subscribeForm">
+            <input type="email" id="subscribeEmail" placeholder="Введите ваш email" required />
+            <button type="submit">Подписаться</button>
+        </form>
+        <div id="subscribeMessage" role="alert" aria-live="polite"></div>
+    </section>
+
+    <div class="cart-notification" id="cartNotification">Товар добавлен в корзину!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

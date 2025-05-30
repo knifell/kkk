@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Аптека Онлайн</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script defer src="cart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Аптека Онлайн</a>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="about.html">О нас</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="cart-icon">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Ваша корзина</h1>
+
+        <div class="cart-wrapper">
+            <div class="cart-items" id="cart-items">
+                <!-- Товары будут добавлены через JavaScript -->
+            </div>
+
+            <div class="checkout-form">
+                <h2>Оформление заказа</h2>
+
+                <div class="form-group">
+                    <label for="customer-name">ФИО *</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Адрес доставки *</label>
+                    <textarea id="address" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-method">Способ оплаты *</label>
+                    <select id="payment-method" required>
+                        <option value="">Выберите способ</option>
+                        <option value="cash">Наличными при получении</option>
+                        <option value="card">Картой при получении</option>
+                        <option value="online">Онлайн-оплата</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Комментарий к заказу</label>
+                    <textarea id="comments" rows="2"></textarea>
+                </div>
+
+                <div class="cart-total">
+                    <div class="total-row">
+                        <span>Итого:</span>
+                        <span id="total-price">₽0</span>
+                    </div>
+
+                    <button id="checkout-btn" class="btn-primary">
+                        <i class="fas fa-check-circle"></i> Оформить заказ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Аптека Онлайн. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
