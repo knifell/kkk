@@ -95,14 +95,23 @@ header nav ul {
     background: #f9f9f9;
 }
 
-    .categories h2 {
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
+.categories h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Обертка для кнопок категории — flex с переносом */
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px; /* отступы между кнопками */
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
 .category-list .category-btn {
     padding: 12px 25px;
-    margin: 8px;
     background: #ddd;
     border: none;
     border-radius: 30px;
@@ -110,11 +119,36 @@ header nav ul {
     font-size: 16px;
     font-weight: 600;
     transition: background 0.3s;
+    white-space: nowrap; /* предотвращает перенос текста в кнопке */
+    flex-shrink: 0; /* не сжимать кнопки */
 }
 
-    .category-list .category-btn:hover {
-        background: #ccc;
+.category-list .category-btn:hover {
+    background: #ccc;
+}
+
+/* Адаптив для мобильных и маленьких экранов */
+@media (max-width: 600px) {
+    .category-list {
+        gap: 10px;
     }
+    .category-list .category-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .category-list {
+        gap: 8px;
+        justify-content: flex-start;
+        padding: 0 10px;
+    }
+    .category-list .category-btn {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+}
 
 /* Слайдер */
 .slider {
